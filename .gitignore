@@ -1,0 +1,8 @@
+/node_modules/
+/dist/
+.idea/
+*.db
+*.lock
+*.log
+/test_db
+*.env
