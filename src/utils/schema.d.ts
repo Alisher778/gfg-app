@@ -3,7 +3,7 @@
 
 declare namespace GQL {
   interface IGraphQLResponseRoot {
-    data?: IQuery;
+    data?: IQuery | IMutation;
     errors?: Array<IGraphQLResponseError>;
   }
 
@@ -38,6 +38,23 @@ declare namespace GQL {
     category_id: string | null;
   }
 
+  interface IMutation {
+    __typename: 'Mutation';
+    CreateProduct: IProduct | null;
+  }
+
+  interface ICreateProductOnMutationArguments {
+    payload?: ICreateProductRequest | null;
+  }
+
+  interface ICreateProductRequest {
+    apiKey: string;
+    name: string;
+    color: string;
+    price: number;
+    category_id: string;
+  }
+
   interface ICategory {
     __typename: 'Category';
     id: string | null;
@@ -56,15 +73,7 @@ declare namespace GQL {
     READY_TO_SHIP = 'READY_TO_SHIP',
     SHIPPED = 'SHIPPED',
     DELIVERED = 'DELIVERED',
-    CANCELLED = 'CANCELLED'
-  }
-
-  interface ICreateProductRequest {
-    apiKey?: string | null;
-    name?: string | null;
-    color?: string | null;
-    price?: number | null;
-    category_id?: string | null;
+    CANCELLED = 'CANCELLED',
   }
 
   interface IProductRequest {

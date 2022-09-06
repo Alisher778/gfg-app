@@ -4,10 +4,10 @@ type Query {
   # GetCategories(payload: EmptyRequest): Category
   # GetOrders(payload: EmptyRequest): Order
 }
-  
+
 type Mutation {
   CreateProduct(payload: CreateProductRequest): Product
-  # EditProduct(payload: ProductRequest): Product
+  EditProduct(payload: ProductInput): Product
   # CreateOrder(payload: CreateOrderRequest): Order
   # ChangeOrderStatus(payload: ChangeOrderStatusRequest): Order
 }
@@ -32,11 +32,11 @@ type Order {
 }
 
 input CreateProductRequest {
-  apiKey: String
-  name: String
-  color: String
-  price: Float
-  category_id: ID
+  apiKey: String!
+  name: String!
+  color: String!
+  price: Float!
+  category_id: ID!
 }
 
 input ProductRequest {
