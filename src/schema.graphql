@@ -1,14 +1,76 @@
 type Query {
-  books: [Book]
-  authors: [Author]
+  GetProducts(payload: GetProductsRequest): ProductStreamResponse
+  SearchProducts(payload: SearchProductsRequest): ProductStreamResponse
+  GetCategories(payload: EmptyRequest): Category
+  GetOrders(payload: EmptyRequest): Order
+}
+  
+type Mutation {
+  CreateProduct(payload: CreateProductRequest): Product
+  EditProduct(payload: ProductRequest): Product
+  CreateOrder(payload: CreateOrderRequest): Order
+  ChangeOrderStatus(payload: ChangeOrderStatusRequest): Order
 }
 
-type Book {
-  title: String
-  author: Author
-}
-
-type Author {
+type Product {
+  id: ID
   name: String
-  books: [Book]
+  color: String
+  price: Float
+  category_id: ID
+}
+
+type Category {
+  id: ID
+  name: String
+}
+
+type Order {
+  id: ID
+  status: OrderStatus
+  items: [Int]
+}
+
+type ProductStreamResponse {
+  product: Product
+}
+
+input CreateProductRequest {
+  apiKey: String
+  name: String
+  color: String
+  price: Float
+  category_id: ID
+}
+
+input ProductRequest {
+  apiKey: String
+  product: Product
+}
+
+input GetProductsRequest {
+  apiKey: String
+  ids: [ID]
+}
+
+input SearchProductsRequest {
+  apiKey: String
+  name: String
+}
+
+input EmptyRequest {
+  apiKey: String
+}
+
+input CreateOrderRequest {
+  apiKey: String
+  items: [Int]
+}
+
+enum OrderStatus {
+  CREATED
+  READY_TO_SHIP
+  SHIPPED
+  DELIVERED
+  CANCELLED
 }
