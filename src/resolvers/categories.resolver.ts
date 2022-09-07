@@ -90,12 +90,3 @@ export const editCategoryResolver = async (args: IEditCategoryInput) => {
     throw new Error(error);
   }
 };
-
-function isCategoryExist({ categories, name }) {
-  const categoryNameExist = categories.find(
-    i => i.name?.toLowerCase() == name?.toLowerCase()
-  );
-  if (categoryNameExist) {
-    throw new Error(`Category ${name} is already exist`);
-  }
-}

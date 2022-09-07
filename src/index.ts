@@ -48,14 +48,12 @@ async function startApolloServer(typeDefs, resolvers) {
     cache: 'bounded',
     introspection: true,
     context: ({ req }) => {
-      const token = req.headers.authorization || '';
-      console.log(token);
+      const token = req.headers?.authorization || '';
       if (!token) {
         throw new AuthenticationError('you must be logged in');
       }
 
       const user = getCurrentUser(token);
-      console.log(user);
       if (!user) {
         throw new AuthenticationError('Wrong credentials');
       }

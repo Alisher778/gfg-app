@@ -5,6 +5,7 @@ import {
   IEditCategoryInput,
   IOrdersInput,
   IProductInput,
+  ResolverMap,
 } from '../utils/interfaces';
 import {
   createCategoryResolver,
@@ -22,12 +23,6 @@ import {
   getProductsResolver,
   searchProductsResolver,
 } from './products.resolver';
-
-interface ResolverMap {
-  [key: string]: {
-    [key: string]: (parent: any, args: any, context: any, info: any) => any;
-  };
-}
 
 export const RootResolvers: ResolverMap = {
   Query: {
@@ -54,9 +49,8 @@ export const RootResolvers: ResolverMap = {
     ) {
       return editProductResolver(args);
     },
-    CreateOrder(_, args: { payload: ICreateOrderInput }) {
-      console.log('----', args.payload);
-      return createOrderResolver(args.payload);
+    CreateOrder(_, args: ICreateOrderInput) {
+      return createOrderResolver(args);
     },
     ChangeOrderStatus(_, args: IChangeOrderStatusInput) {
       return changeOrderStatusResolver(args);

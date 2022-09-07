@@ -1,3 +1,9 @@
+export interface ResolverMap {
+  [key: string]: {
+    [key: string]: (parent: any, args: any, context: any, info: any) => any;
+  };
+}
+
 export interface IProductInput {
   name: string;
   color: string;
@@ -27,6 +33,7 @@ export interface IChangeOrderStatusInput {
 export interface IOrdersInput {
   orderIds: string[];
 }
+
 export interface ICreateOrderInput {
   items: string[];
 }
@@ -34,6 +41,7 @@ export interface ICreateOrderInput {
 export interface ICreateCategoryInput {
   name: string;
 }
+
 export interface IEditCategoryInput {
   categoryId: string;
   name: string;
@@ -42,6 +50,16 @@ export interface IEditCategoryInput {
 export interface ICategory {
   id: string;
   name: string;
+}
+
+export type TDbNames = 'PRODUCTS' | 'ORDERS' | 'CATEGORIES';
+
+export interface IJsonReadFileProps {
+  db?: TDbNames;
+}
+
+export interface IJsonWriteFileProps extends IJsonReadFileProps {
+  data: any;
 }
 
 export enum EOrderStatus {
