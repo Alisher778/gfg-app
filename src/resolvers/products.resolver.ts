@@ -19,6 +19,20 @@ export const getProductsResolver = async (
   }
 };
 
+export const searchProductsResolver = async (name: string) => {
+  try {
+    const data: IProduct[] = await readFromJson();
+
+    if (!name.trim()) {
+      throw new Error(`Product not found with the name: ${name}`);
+    }
+
+    return data.filter(i => i.name.toLowerCase().includes(name.toLowerCase()));
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
 export const createProductResolver = async (product: IProductInput) => {
   try {
     const data: IProduct[] = await readFromJson();

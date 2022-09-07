@@ -1,6 +1,6 @@
 type Query {
   GetProducts(ids: [ID]): [Product]
-  # SearchProducts(payload: SearchProductsRequest): ProductStreamResponse
+  SearchProducts(name: String!): [Product]
   # GetCategories(payload: EmptyRequest): Category
   # GetOrders(payload: EmptyRequest): Order
 }

@@ -3,6 +3,7 @@ import {
   createProductResolver,
   editProductResolver,
   getProductsResolver,
+  searchProductsResolver,
 } from './products.resolver';
 
 interface ResolverMap {
@@ -16,7 +17,9 @@ export const RootResolvers: ResolverMap = {
     GetProducts(_, args: GQL.IGetProductsOnQueryArguments) {
       return getProductsResolver(args || []);
     },
-    // SearchProducts(payload: SearchProductsRequest): ProductStreamResponse
+    SearchProducts(_, args: GQL.ISearchProductsOnQueryArguments) {
+      return searchProductsResolver(args.name);
+    },
     // GetCategories(payload: EmptyRequest): Category
     // GetOrders(payload: EmptyRequest): Order
   },

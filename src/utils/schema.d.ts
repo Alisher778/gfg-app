@@ -23,10 +23,15 @@ declare namespace GQL {
   interface IQuery {
     __typename: 'Query';
     GetProducts: Array<IProduct | null> | null;
+    SearchProducts: Array<IProduct | null> | null;
   }
 
   interface IGetProductsOnQueryArguments {
     ids?: Array<string | null> | null;
+  }
+
+  interface ISearchProductsOnQueryArguments {
+    name: string;
   }
 
   interface IProduct {
