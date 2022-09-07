@@ -7,7 +7,7 @@ export const getProductsResolver = async (
 ) => {
   try {
     const { ids = [] } = args;
-    const data: IProduct[] = await readFromJson();
+    const data: IProduct[] = await readFromJson({ db: 'PRODUCTS' });
 
     if (ids && ids.length) {
       return data.filter(i => ids.includes(String(i.id)));
@@ -21,7 +21,7 @@ export const getProductsResolver = async (
 
 export const searchProductsResolver = async (name: string) => {
   try {
-    const data: IProduct[] = await readFromJson();
+    const data: IProduct[] = await readFromJson({ db: 'PRODUCTS' });
 
     if (!name.trim()) {
       throw new Error(`Product not found with the name: ${name}`);
@@ -35,13 +35,13 @@ export const searchProductsResolver = async (name: string) => {
 
 export const createProductResolver = async (product: IProductInput) => {
   try {
-    const data: IProduct[] = await readFromJson();
+    const data: IProduct[] = await readFromJson({ db: 'PRODUCTS' });
     const newProduct: IProduct = {
       id: uuidv4(),
       ...product,
     };
     data.push(newProduct);
-    await writeToJson(data);
+    await writeToJson({ db: 'PRODUCTS', data });
 
     return newProduct;
   } catch (error: any) {
@@ -55,7 +55,7 @@ export const editProductResolver = async (args: {
 }) => {
   try {
     const { productId, payload } = args;
-    const data: IProduct[] = await readFromJson();
+    const data: IProduct[] = await readFromJson({ db: 'PRODUCTS' });
 
     const findProduct = data.find(i => i.id == productId);
     if (!findProduct) {
@@ -74,7 +74,7 @@ export const editProductResolver = async (args: {
       return product;
     });
 
-    await writeToJson(updatedList);
+    await writeToJson({ db: 'PRODUCTS', data: updatedList });
 
     return editedProduct;
   } catch (error: any) {
