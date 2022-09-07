@@ -1,10 +1,16 @@
 import {
   IChangeOrderStatusInput,
+  ICreateCategoryInput,
   ICreateOrderInput,
-  IOrderInput,
+  IEditCategoryInput,
   IOrdersInput,
   IProductInput,
 } from '../utils/interfaces';
+import {
+  createCategoryResolver,
+  editCategoryResolver,
+  getCategoriesResolver,
+} from './categories.resolver';
 import {
   changeOrderStatusResolver,
   createOrderResolver,
@@ -31,7 +37,9 @@ export const RootResolvers: ResolverMap = {
     SearchProducts(_, args: GQL.ISearchProductsOnQueryArguments) {
       return searchProductsResolver(args.name);
     },
-    // GetCategories(payload: EmptyRequest): Category
+    GetCategories(_, args: ICreateCategoryInput) {
+      return getCategoriesResolver(args);
+    },
     GetOrders(_, args: IOrdersInput) {
       return getOrdersResolver(args);
     },
@@ -52,6 +60,12 @@ export const RootResolvers: ResolverMap = {
     },
     ChangeOrderStatus(_, args: IChangeOrderStatusInput) {
       return changeOrderStatusResolver(args);
+    },
+    CreateCategory(_, args: ICreateCategoryInput) {
+      return createCategoryResolver(args);
+    },
+    EditCategory(_, args: IEditCategoryInput) {
+      return editCategoryResolver(args);
     },
   },
 };

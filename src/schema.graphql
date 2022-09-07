@@ -1,7 +1,7 @@
 type Query {
   GetProducts(ids: [ID]): [Product]
   SearchProducts(name: String!): [Product]
-  # GetCategories(payload: EmptyRequest): Category
+  GetCategories: [Category]
   GetOrders(orderIds: [ID]): [Order]
 }
 
@@ -10,6 +10,8 @@ type Mutation {
   EditProduct(payload: ProductInput, productId: ID!): Product
   CreateOrder(payload: CreateOrderRequest): Order
   ChangeOrderStatus(order_id: ID!, status: OrderStatus!): Order
+  CreateCategory(name: String!): Category
+  EditCategory(categoryId: ID!, name: String!): Category
 }
 
 type Product {
