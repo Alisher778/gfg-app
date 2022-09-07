@@ -4,9 +4,10 @@ import path from 'path';
 const DB = {
   PRODUCTS: path.join(__dirname, '../db/products.json'),
   ORDERS: path.join(__dirname, '../db/orders.json'),
+  CATEGORIES: path.join(__dirname, '../db/categories.json'),
 };
 
-type TDbNames = 'PRODUCTS' | 'ORDERS';
+type TDbNames = 'PRODUCTS' | 'ORDERS' | 'CATEGORIES';
 
 export const readFromJson = async ({ db = 'PRODUCTS' }: { db?: TDbNames }) => {
   try {

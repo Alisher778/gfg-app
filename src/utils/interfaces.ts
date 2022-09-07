@@ -31,6 +31,19 @@ export interface ICreateOrderInput {
   items: string[];
 }
 
+export interface ICreateCategoryInput {
+  name: string;
+}
+export interface IEditCategoryInput {
+  categoryId: string;
+  name: string;
+}
+
+export interface ICategory {
+  id: string;
+  name: string;
+}
+
 export enum EOrderStatus {
   CREATED = 'CREATED',
   READY_TO_SHIP = 'READY_TO_SHIP',
