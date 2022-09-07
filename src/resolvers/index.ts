@@ -1,19 +1,20 @@
-import { IProductInput } from '../utils/interfaces'
+import { IProductInput } from '../utils/interfaces';
 import {
-  createProductsResolver,
+  createProductResolver,
+  editProductResolver,
   getProductsResolver,
-} from './products.resolver'
+} from './products.resolver';
 
 interface ResolverMap {
   [key: string]: {
-    [key: string]: (parent: any, args: any, context: any, info: any) => any
-  }
+    [key: string]: (parent: any, args: any, context: any, info: any) => any;
+  };
 }
 
 export const RootResolvers: ResolverMap = {
   Query: {
     GetProducts(_, args: GQL.IGetProductsOnQueryArguments) {
-      return getProductsResolver(args || [])
+      return getProductsResolver(args || []);
     },
     // SearchProducts(payload: SearchProductsRequest): ProductStreamResponse
     // GetCategories(payload: EmptyRequest): Category
@@ -21,10 +22,16 @@ export const RootResolvers: ResolverMap = {
   },
   Mutation: {
     CreateProduct(_, args: { payload: IProductInput }) {
-      return createProductsResolver(args.payload)
+      return createProductResolver(args.payload);
+    },
+    EditProduct(
+      _,
+      args: { payload: GQL.IEditProductOnMutationArguments; productId: string }
+    ) {
+      return editProductResolver(args);
     },
     // EditProduct(payload: ProductRequest): Product
     // CreateOrder(payload: CreateOrderRequest): Order
     // ChangeOrderStatus(payload: ChangeOrderStatusRequest): Order
   },
-}
+};

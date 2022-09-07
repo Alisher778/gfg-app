@@ -7,7 +7,7 @@ type Query {
 
 type Mutation {
   CreateProduct(payload: CreateProductRequest): Product
-  EditProduct(payload: ProductInput): Product
+  EditProduct(payload: ProductInput, productId: ID!): Product
   # CreateOrder(payload: CreateOrderRequest): Order
   # ChangeOrderStatus(payload: ChangeOrderStatusRequest): Order
 }

@@ -19,7 +19,7 @@ export const getProductsResolver = async (
   }
 };
 
-export const createProductsResolver = async (product: IProductInput) => {
+export const createProductResolver = async (product: IProductInput) => {
   try {
     const data: IProduct[] = await readFromJson();
     const newProduct: IProduct = {
@@ -30,6 +30,39 @@ export const createProductsResolver = async (product: IProductInput) => {
     await writeToJson(data);
 
     return newProduct;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const editProductResolver = async (args: {
+  payload: GQL.IEditProductOnMutationArguments;
+  productId: string;
+}) => {
+  try {
+    const { productId, payload } = args;
+    const data: IProduct[] = await readFromJson();
+
+    const findProduct = data.find(i => i.id == productId);
+    if (!findProduct) {
+      throw new Error(`Product not found with the id: ${productId}`);
+    }
+
+    const editedProduct: IProduct = {
+      ...findProduct,
+      ...payload,
+    };
+
+    const updatedList = data.map(product => {
+      if (product.id == productId) {
+        return editedProduct;
+      }
+      return product;
+    });
+
+    await writeToJson(updatedList);
+
+    return editedProduct;
   } catch (error: any) {
     throw new Error(error);
   }

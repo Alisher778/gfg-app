@@ -41,10 +41,16 @@ declare namespace GQL {
   interface IMutation {
     __typename: 'Mutation';
     CreateProduct: IProduct | null;
+    EditProduct: IProduct | null;
   }
 
   interface ICreateProductOnMutationArguments {
     payload?: ICreateProductRequest | null;
+  }
+
+  interface IEditProductOnMutationArguments {
+    payload?: IProductInput | null;
+    productId: string;
   }
 
   interface ICreateProductRequest {
@@ -53,6 +59,14 @@ declare namespace GQL {
     color: string;
     price: number;
     category_id: string;
+  }
+
+  interface IProductInput {
+    id?: string | null;
+    name?: string | null;
+    color?: string | null;
+    price?: number | null;
+    category_id?: string | null;
   }
 
   interface ICategory {
@@ -79,14 +93,6 @@ declare namespace GQL {
   interface IProductRequest {
     apiKey?: string | null;
     product?: IProductInput | null;
-  }
-
-  interface IProductInput {
-    id?: string | null;
-    name?: string | null;
-    color?: string | null;
-    price?: number | null;
-    category_id?: string | null;
   }
 
   interface IGetProductsRequest {
