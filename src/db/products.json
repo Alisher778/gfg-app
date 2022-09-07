@@ -1,24 +1,18 @@
 [
   {
-    "id": 1,
-    "name": "Hello"
+    "id": "5b29ebb3-8050-4b58-b955-4b73c648b47d",
+    "apiKey": "123",
+    "name": "iPhone 14",
+    "color": "Grey",
+    "price": 1399,
+    "category_id": "ba636075-a20c-4e91-bd79-c40f2311701d"
   },
   {
-    "id": 2,
-    "name": "Hello 111"
-  },
-  {
-    "id": "72d92c45-8eb4-4bc7-84f8-2798100825ff",
-    "items": [
-      "1",
-      "2"
-    ]
-  },
-  {
-    "id": "e1dde628-804d-4cd0-9277-c4df448adbc0",
-    "items": [
-      "1",
-      "2"
-    ]
+    "id": "5b29ebb3-8050-4b58-b955-4b73c648b47d",
+    "apiKey": "123",
+    "name": "iMac 24'",
+    "color": "Silver",
+    "price": 2399,
+    "category_id": "47e265e3-38dc-4c03-9457-b8392347b804"
   }
 ]

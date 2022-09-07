@@ -10,8 +10,10 @@ import http from 'http';
 import {
   ApolloServerPluginLandingPageGraphQLPlayground,
   ApolloServerPluginDrainHttpServer,
+  AuthenticationError,
 } from 'apollo-server-core';
 import { RootResolvers } from './resolvers';
+import { getCurrentUser } from './utils/auth';
 
 dotenv.config();
 
@@ -45,6 +47,21 @@ async function startApolloServer(typeDefs, resolvers) {
     csrfPrevention: true,
     cache: 'bounded',
     introspection: true,
+    context: ({ req }) => {
+      const token = req.headers.authorization || '';
+      console.log(token);
+      if (!token) {
+        throw new AuthenticationError('you must be logged in');
+      }
+
+      const user = getCurrentUser(token);
+      console.log(user);
+      if (!user) {
+        throw new AuthenticationError('Wrong credentials');
+      }
+
+      return { user };
+    },
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
       ApolloServerPluginLandingPageGraphQLPlayground(),
