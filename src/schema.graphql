@@ -2,14 +2,14 @@ type Query {
   GetProducts(ids: [ID]): [Product]
   SearchProducts(name: String!): [Product]
   # GetCategories(payload: EmptyRequest): Category
-  # GetOrders(payload: EmptyRequest): Order
+  GetOrders(orderIds: [ID]): [Order]
 }
 
 type Mutation {
   CreateProduct(payload: CreateProductRequest): Product
   EditProduct(payload: ProductInput, productId: ID!): Product
-  # CreateOrder(payload: CreateOrderRequest): Order
-  # ChangeOrderStatus(payload: ChangeOrderStatusRequest): Order
+  CreateOrder(payload: CreateOrderRequest): Order
+  ChangeOrderStatus(order_id: ID!, status: OrderStatus!): Order
 }
 
 type Product {
@@ -28,7 +28,7 @@ type Category {
 type Order {
   id: ID
   status: OrderStatus
-  items: [Int]
+  items: [ID]
 }
 
 input CreateProductRequest {
@@ -62,19 +62,9 @@ input SearchProductsRequest {
   name: String
 }
 
-input EmptyRequest {
-  apiKey: String
-}
-
 input CreateOrderRequest {
   apiKey: String
-  items: [Int]
-}
-
-input ChangeOrderStatusRequest {
-  apiKey: String
-  order_id: ID
-  status: OrderStatus
+  items: [ID]
 }
 
 enum OrderStatus {

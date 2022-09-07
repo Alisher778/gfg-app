@@ -1,4 +1,15 @@
-import { IProductInput } from '../utils/interfaces';
+import {
+  IChangeOrderStatusInput,
+  ICreateOrderInput,
+  IOrderInput,
+  IOrdersInput,
+  IProductInput,
+} from '../utils/interfaces';
+import {
+  changeOrderStatusResolver,
+  createOrderResolver,
+  getOrdersResolver,
+} from './orders.resolver';
 import {
   createProductResolver,
   editProductResolver,
@@ -21,7 +32,9 @@ export const RootResolvers: ResolverMap = {
       return searchProductsResolver(args.name);
     },
     // GetCategories(payload: EmptyRequest): Category
-    // GetOrders(payload: EmptyRequest): Order
+    GetOrders(_, args: IOrdersInput) {
+      return getOrdersResolver(args);
+    },
   },
   Mutation: {
     CreateProduct(_, args: { payload: IProductInput }) {
@@ -33,8 +46,12 @@ export const RootResolvers: ResolverMap = {
     ) {
       return editProductResolver(args);
     },
-    // EditProduct(payload: ProductRequest): Product
-    // CreateOrder(payload: CreateOrderRequest): Order
-    // ChangeOrderStatus(payload: ChangeOrderStatusRequest): Order
+    CreateOrder(_, args: { payload: ICreateOrderInput }) {
+      console.log('----', args.payload);
+      return createOrderResolver(args.payload);
+    },
+    ChangeOrderStatus(_, args: IChangeOrderStatusInput) {
+      return changeOrderStatusResolver(args);
+    },
   },
 };
