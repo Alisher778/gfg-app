@@ -1,7 +1,6 @@
 import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
-import logger from 'morgan';
 import dotenv from 'dotenv';
 import { ApolloServer } from 'apollo-server-express';
 import cors from 'cors';
@@ -24,7 +23,6 @@ const typeDefs = importSchema(
   { out: 'DocumentNode' }
 );
 
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

@@ -2,17 +2,23 @@
   {
     "id": "5b29ebb3-8050-4b58-b955-4b73c648b47d",
     "apiKey": "123",
-    "name": "iPhone 14",
+    "name": "iPhone 14 Pro Max",
     "color": "Grey",
-    "price": 1399,
+    "price": 1099,
     "category_id": "ba636075-a20c-4e91-bd79-c40f2311701d"
   },
   {
-    "id": "5b29ebb3-8050-4b58-b955-4b73c648b47d",
-    "apiKey": "123",
-    "name": "iMac 24'",
-    "color": "Silver",
-    "price": 2399,
+    "id": "aa080145-c91d-4b5b-8382-4c7a6e65d213",
+    "name": "Macbook Pro",
+    "color": "Grey",
+    "price": 3399,
+    "category_id": "47e265e3-38dc-4c03-9457-b8392347b804"
+  },
+  {
+    "id": "93d83cf5-405d-4daa-9f14-bc46f21e9d0c",
+    "name": "Macbook Pro 16",
+    "color": "Grey",
+    "price": 4199,
     "category_id": "47e265e3-38dc-4c03-9457-b8392347b804"
   }
 ]
