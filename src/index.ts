@@ -1,7 +1,6 @@
 import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
-import logger from 'morgan';
 import dotenv from 'dotenv';
 import { ApolloServer } from 'apollo-server-express';
 import cors from 'cors';
@@ -24,7 +23,6 @@ const typeDefs = importSchema(
   { out: 'DocumentNode' }
 );
 
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -48,14 +46,12 @@ async function startApolloServer(typeDefs, resolvers) {
     cache: 'bounded',
     introspection: true,
     context: ({ req }) => {
-      const token = req.headers.authorization || '';
-      console.log(token);
+      const token = req.headers?.authorization || '';
       if (!token) {
         throw new AuthenticationError('you must be logged in');
       }
 
       const user = getCurrentUser(token);
-      console.log(user);
       if (!user) {
         throw new AuthenticationError('Wrong credentials');
       }

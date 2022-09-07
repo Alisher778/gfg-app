@@ -1,5 +1,6 @@
 import jsonfile from 'jsonfile';
 import path from 'path';
+import { IJsonReadFileProps, IJsonWriteFileProps } from './interfaces';
 
 const DB = {
   PRODUCTS: path.join(__dirname, '../db/products.json'),
@@ -7,14 +8,11 @@ const DB = {
   CATEGORIES: path.join(__dirname, '../db/categories.json'),
 };
 
-type TDbNames = 'PRODUCTS' | 'ORDERS' | 'CATEGORIES';
-
-export const readFromJson = async ({ db = 'PRODUCTS' }: { db?: TDbNames }) => {
+export const readFromJson = async ({ db = 'PRODUCTS' }: IJsonReadFileProps) => {
   try {
     const file = await jsonfile.readFile(DB[db], 'utf8');
     return file;
   } catch (error) {
-    console.log(JSON.stringify(error, null, 2));
     return error;
   }
 };
@@ -22,16 +20,11 @@ export const readFromJson = async ({ db = 'PRODUCTS' }: { db?: TDbNames }) => {
 export const writeToJson = async ({
   db = 'PRODUCTS',
   data,
-}: {
-  db?: TDbNames;
-  data: any;
-}) => {
+}: IJsonWriteFileProps) => {
   try {
-    console.log(DB[db]);
     const file = await jsonfile.writeFile(DB[db], data, { spaces: 2 });
     return file;
   } catch (error) {
-    console.log(JSON.stringify(error, null, 2));
     return error;
   }
 };

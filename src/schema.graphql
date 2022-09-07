@@ -8,7 +8,7 @@ type Query {
 type Mutation {
   CreateProduct(payload: CreateProductRequest): Product
   EditProduct(payload: ProductInput, productId: ID!): Product
-  CreateOrder(payload: CreateOrderRequest): Order
+  CreateOrder(items: [ID]): Order
   ChangeOrderStatus(order_id: ID!, status: OrderStatus!): Order
   CreateCategory(name: String!): Category
   EditCategory(categoryId: ID!, name: String!): Category
@@ -34,16 +34,10 @@ type Order {
 }
 
 input CreateProductRequest {
-  apiKey: String!
   name: String!
   color: String!
   price: Float!
   category_id: ID!
-}
-
-input ProductRequest {
-  apiKey: String
-  product: ProductInput
 }
 
 input ProductInput {
@@ -52,21 +46,6 @@ input ProductInput {
   color: String
   price: Float
   category_id: ID
-}
-
-input GetProductsRequest {
-  apiKey: String
-  ids: [ID]
-}
-
-input SearchProductsRequest {
-  apiKey: String
-  name: String
-}
-
-input CreateOrderRequest {
-  apiKey: String
-  items: [ID]
 }
 
 enum OrderStatus {
